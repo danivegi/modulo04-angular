@@ -1,0 +1,42 @@
+<section class="gallery">
+
+    <!-- Imagen seleccionada -->
+    <div class="selected">
+        <img [src]="selected().src" [alt]="selected().title" [style.width.px]="size()" />
+        <p class="caption">{{ selected().title }}</p>
+    </div>
+
+    <!-- Imgs en miniaturas -->
+    <div class="thumbnails">
+  @for (img of pagedImages(); track img.id) {
+    <img class="thumb"
+         [class.active]="img.id === selected().id"
+         [src]="img.src"
+         [alt]="img.title"
+         (click)="select(img)" />
+  }
+</div>
+
+<div class="pager">
+  <button (click)="prevPage()" [disabled]="isFirstPage()">‹</button>
+  <span>Página {{ page() + 1 }} / {{ totalPages() }}</span>
+  <button (click)="nextPage()" [disabled]="isLastPage()">›</button>
+</div>
+
+
+    <!-- Botones -->
+    <div class="toolbar">
+        <button (click)="prev()" [disabled]="isFirst()">◀ Anterior</button>
+        <button (click)="next()" [disabled]="isLast()">Siguiente ▶</button>
+        <button (click)="zoomIn()">+ Aumentar</button>
+        <button (click)="zoomOut()">- Disminuir</button>
+
+        @if (!isPlaying()) {
+        <button (click)="play()">▶ Play</button>
+        }
+        @if (isPlaying()) {
+        <button (click)="stop()">⏹ Stop</button>
+        }
+    </div>
+
+</section>
