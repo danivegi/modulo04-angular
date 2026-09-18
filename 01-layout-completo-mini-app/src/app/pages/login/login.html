@@ -1,0 +1,34 @@
+<mat-card class="login-card">
+  <h2>Iniciar sesión</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario (email)</mat-label>
+      <input matInput type="email" formControlName="username"
+             placeholder="master@lemoncode.net" />
+      @if (username.touched && username.hasError('required')) {
+        <mat-error>El usuario es obligatorio</mat-error>
+      }
+      @if (username.touched && username.hasError('email')) {
+        <mat-error>Introduce un email válido</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" />
+      @if (password.touched && password.hasError('required')) {
+        <mat-error>La contraseña es obligatoria</mat-error>
+      }
+      @if (password.touched && password.hasError('minlength')) {
+        <mat-error>Mínimo 8 caracteres</mat-error>
+      }
+    </mat-form-field>
+
+    @if (loginError) {
+      <p class="error-msg">Usuario o contraseña incorrectos</p>
+    }
+
+    <button mat-raised-button color="primary" type="submit">Entrar</button>
+  </form>
+</mat-card>

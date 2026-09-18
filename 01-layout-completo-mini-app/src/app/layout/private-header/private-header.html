@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-icon>videogame_asset</mat-icon>
+  <span class="brand">MiApp Lemoncode</span>
+
+  <span class="spacer"></span>
+
+  <span class="user">{{ auth.getUsername() }}</span>
+  <button mat-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Salir
+  </button>
+</mat-toolbar>
